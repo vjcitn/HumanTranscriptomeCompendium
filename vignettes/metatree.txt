@@ -1,0 +1,34 @@
+_source
+├── instrument_model
+├── library_layout/selection/source/strategy
+├── platform
+├── sample
+│   ├── BioSample
+│   ├── Published/Received/Status
+│   ├── accession
+│   ├── alias
+│   ├── attributes (tag, value):
+│   │   ├── BioSampleModel
+│   │   ├── collection_date
+│   │   ├── geo_loc_name
+│   │   ├── identified_by
+│   │   ├── isolation_source
+│   │   ├── sample_type
+│   │   └── strain
+│   ├── center_name
+│   ├── identifiers (id, namespace)*
+│   ├── organism
+│   ├── sample_accession
+│   └── taxon_id
+└── study
+    ├── BioProject
+    ├── LastMetaUpdate/LastUpdate/Published/Received
+    ├── Status
+    ├── abstract
+    ├── accession
+    ├── alias
+    ├── center_name
+    ├── identifiers (id, namespace*)
+    ├── study_accession
+    ├── study_type
+    └── title

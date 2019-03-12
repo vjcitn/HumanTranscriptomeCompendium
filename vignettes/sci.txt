@@ -1,0 +1,41 @@
+The human transcriptome compendium: Scalable discovery
+and acquisition of RNA-seq data
+
+Sean Davis, John Readey, Herve Pages, Samuela Pollack,
+Shweta Gopaulakrishnan, Levi Waldron, Martin Morgan,
+Vincent Carey
+
+We describe three components of a data discovery and
+delivery system for human transcriptomics.  SRAdbV2 is
+a modern metadata management and query resolution
+utility for NCBI SRA.  HDF Scalable Data Service (HSDS) is a
+high-performance archive for numerical array storage
+and interrogation.  htxcomp is a Bioconductor package
+defining convenient interfaces to SRAdbV2 and HSDS
+to afford performant access to transcript-by-sample
+quantifications obtained using the salmon quantification
+algorithms.  At present, 181134 transcriptomes are available
+for interrogation.  This approach to defining a cloud-scale
+compendium of genome-scale assay outputs provides scalable
+solutions for both large-scale analysis of statistical 
+properties of assay protocols, and focused interrogation 
+of gene- or transcript-level variation across phenotypes 
+of interest.
+
+Introduction
+
+The FAIR (Findable, Accessible, Interoperable, and
+Reusable) principles of genomic data architecture are
+important for accelerating achievement of ambitions 
+of integrative genome biology.  Diversity of computational
+approaches to data publishing, discovery, and acquisition
+is inevitable, but growth in adoption of representational
+state transfer (REST) application programming interface (API) 
+methods has greatly simplified solutions to discovery
+and communication problems arising in genomic data access.
+Briefly, client software can drive server computations to
+deliver structured metadata and data, simply by encoding
+a browsable URL with directives expressed in a sharply limited
+vocabulary.  The "omicidx" API defined at api-omicidx.cancerdatasci.org
+uses the RESTful GET directive to retrieve hierarchically structured
+metadata about all experiments lodged in NCBI SRA.
