@@ -1,9 +1,9 @@
 ---
-title: "HumanTranscriptomeCompendium -- a compendium of sequenced human transcriptomes"
+title: "HumanTranscriptomeCompendium -- a cloud-resident collection of sequenced human transcriptomes"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{HumanTranscriptomeCompendium -- a compendium of sequenced human transcriptomes}
+  %\VignetteIndexEntry{HumanTranscriptomeCompendium -- a cloud-resident collection of sequenced human transcriptomes}
   %\VignetteEncoding{UTF-8}
 output:
   BiocStyle::html_document:
@@ -42,10 +42,8 @@ to a modest collection of metadata about compendium
 contents.  By default, `htx_load` will
 load the cache and establish a connection to
 remote HDF5 representation of quantifications.
-As of 26 November 2018 the gene level quantifications
-are obtained via an HDF Server instance run
-by Channing Division of Network Medicine at
-Brigham and Women's Hospital.
+The numerical data is lodged in an instance of
+the HDF Scalable Data Service, at `http://hsdshdflab.hdfgroup.org`.
 
 ```{r lklo}
 library(HumanTranscriptomeCompendium)
@@ -109,3 +107,59 @@ be ignored.
 txlev = htx_load(genesOnly=FALSE)
 txlev
 ```
+
+# Resources of the HumanTranscriptomeCompendium package
+
+The primary purposes of the HumanTranscriptomeCompendium
+package are
+
+- providing programmatic acccess to the remote HDF5
+representation of the compendium
+- providing access to fundamental metadata about the
+contents of the compendium
+- providing an approach to verifying the correctness
+of the representation in the package.
+
+We will address these in turn.
+
+## Access to the quantifications
+
+### `htx_load`
+
+`htx_load` has three arguments: `remotePath`, `cache`, and `genesOnly`.
+
+`genesOnly` defaults to TRUE.  If it is TRUE, the HDF array that
+will be used consists of gene-level quantifications; otherwise
+the array in use will consist of transcript-level quantifications
+based on the Gencode V27 models.
+
+`remotePath` is the path to an RDS-formatted RangedSummarizedExperiment
+instance that has been prepared to include a DelayedArray
+reference to the HSDS representation of the quantifications.  The
+specific reference used depends on the setting of `genesOnly`.
+The default value currently references an AWS S3 bucket to 
+retrieve the RDS.
+
+`cache` is an instance of `BiocFileCache`, where the RDS
+will be stored and retrieved as needed.
+
+A typical use is `htx = htx_load()` which efficiently sets
+up `htx` to give access to gene-level quantifications.
+After such a command is issued, `assay(htx[G, S])` is the
+DelayedMatrix for features `G` on samples `S`.  If `G` or `S`
+are too long, the HSDS may return an error.  Systematic
+chunking of large requests is a topic of future development.
+
+### `htx_query`
+
+ [1] "addRD"                                
+ [2] "bigrnaFiles"                          
+ [3] "experTable"                           
+ [4] "htx_app"                              
+ [6] "htx_query"                            
+ [7] "HumanTranscriptomeCompendium.colnames"
+ [8] "procExpToGene"                        
+ [9] "sampleAtts"                           
+[10] "studTable"                            
+[11] "tx2gene_gencode27"                    
+[12] "uniqueAcc_120518"                     
