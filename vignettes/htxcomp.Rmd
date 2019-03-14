@@ -272,6 +272,8 @@ fact, for some studies, a sparse setup seems to be used.
 We want to make it very easy to use the swagger API set up
 by Sean Davis for SRA metadata.
 
+![swagger look](SRAAPIpic.png)
+
 ![swagger SRAdbV2](swaggerDemo.png)
 
 However, real-time querying may be tedious and/or fragile.  Therefore
