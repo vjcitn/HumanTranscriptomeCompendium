@@ -1,5 +1,8 @@
 ---
 title: "HumanTranscriptomeCompendium -- a cloud-resident collection of sequenced human transcriptomes"
+author: >
+  Vince Carey, Sean Davis, Herve Pages, Samuela Pollack, 
+  Shweta Gopaulakrishnan, BJ Stubbs, John Readey, Levi Waldron, Martin Morgan 
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
@@ -170,13 +173,110 @@ The cancer9k app provides a 'search engine'-like capability over a richer
 collection of sample-level attributes.  See the package at vjcitn/htxapp
 for the sources related to cancer9k.
 
- [1] "addRD"                                
- [2] "bigrnaFiles"                          
- [3] "experTable"                           
- [4] "htx_app"                              
- [7] "HumanTranscriptomeCompendium.colnames"
- [8] "procExpToGene"                        
- [9] "sampleAtts"                           
-[10] "studTable"                            
-[11] "tx2gene_gencode27"                    
-[12] "uniqueAcc_120518"                     
+## Fundamental metadata
+
+### bigrnaFiles
+
+This is a vector of length `r length(HumanTranscriptomeCompendium::bigrnaFiles)`.
+It provides relative paths for all relevant salmon output files
+developed in the BigRNA project.
+
+### experTable, studTable
+
+This is a data.frame with `r nrow(HumanTranscriptomeCompendium::experTable)`
+rows and 6 columns.  It is
+a record of all SRA experiments for which metadata was retrieved
+via SRAdbV2 as of 28 June 2018.  `studTable` provides study title
+for each experiment.
+
+### sampleAtts()
+
+This function uses SRAdbV2 in real time to acquire study-level metadata
+component 'sample.attributes' for a selected SRA study accession number.
+
+### tx2gene_gencode27()
+
+This function reads `tx2gene.gencode.v27.csv` from `r Biocpkg("tximportData")`.
+
+### `uniqueAcc_120518`
+
+A character vector of 186011 unique experiment accession numbers.
+
+### HumanTranscriptomeCompendium.colnames
+
+A vector of 181136 strings giving the column names for the
+transcript-level quantifications.
+
+### addRD()
+
+This utility will add a rowData component to the result of
+`htx_load(, ..., genesOnly=TRUE )` giving the gene type, gene id,
+gene name, and havana gene for each row as available.
+
+## Verification tools
+
+The production of HumanTranscriptomeCompendium has considerable
+complexity.  There is a persistent repository of salmon outputs at
+```
+http://bigrna.cancerdatasci.org/results/human/27/*
+   /aux_info/meta_info.json
+```
+where experiment accession is substitute for *.  `procExpToGene` takes
+an experiment accession number and materializes the salmon quantification
+for the user in the form
+
+```
+>      str(nn)
+List of 4
+ $ abundance          : num [1:58288, 1] 22.8668 0.0286 32.8925 2.9392 4.1314 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:58288] "ENSG00000000003.14" "ENSG00000000005.5" "ENSG00000000419.12" "ENSG00000000457.13" ...
+  .. ..$ : NULL
+ $ counts             : num [1:58288, 1] 2427 2 1744 634 662 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:58288] "ENSG00000000003.14" "ENSG00000000005.5" "ENSG00000000419.12" "ENSG00000000457.13" ...
+  .. ..$ : NULL
+ $ length             : num [1:58288, 1] 1962 1294 980 3984 2964 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:58288] "ENSG00000000003.14" "ENSG00000000005.5" "ENSG00000000419.12" "ENSG00000000457.13" ...
+  .. ..$ : NULL
+ $ countsFromAbundance: chr "lengthScaledTPM"
+```
+
+This can be used to check the accuracy of the image of the data in HSDS.
+
+# Comments on motivation
+
+Our main concern is to provide a unified and reasonable efficient
+access to uniformly preprocessed SRA RNA-seq studies.
+The quantifications are provided at
+an instance of the HDF Scalable Data Service.  The `Biocpkg("restfulSE")`
+and `Biocpkg("rhdf5client")` packages allow interrogation of the
+service via familiar SummarizedExperiment-based programming.
+
+The quantifications are not all that useful in the absence of
+accurate metadata (although large-scale unsupervised learning processes
+are certainly feasible without such metadata).  We have therefore
+put a lot of effort into streamlining the acquisition and binding
+of sample-level metadata.
+
+The following is a sketch of the metadata model for SRA contributions.
+
+![metadata model](metatree.png)
+
+"sample.attributes" can have much more (or less) information than is depicted.  In
+fact, for some studies, a sparse setup seems to be used.
+
+![sparse attributes](sparseAnno.png)
+
+We want to make it very easy to use the swagger API set up
+by Sean Davis for SRA metadata.
+
+![swagger SRAdbV2](swaggerDemo.png)
+
+However, real-time querying may be tedious and/or fragile.  Therefore
+we have taken snapshots of the sample.attributes components for all
+studies, serialized them to csv, indexed them using the csv2envs
+utility of htxapp, and produced hashed environments to support
+interactive search using the selectize.js functionality.  These
+details are worked out in vjcitn/htxapp.
