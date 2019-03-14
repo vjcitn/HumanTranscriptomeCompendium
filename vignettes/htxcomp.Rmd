@@ -152,11 +152,28 @@ chunking of large requests is a topic of future development.
 
 ### `htx_query`
 
+`htx_query` has one mandatory argument,
+`study_accessions`.  This function uses `htx_load` to prepare a SummarizedExperiment
+with DelayedArray assay data,
+with samples limited to those in the studies listed in the character vector
+argument `study_accessions`.  Optional arguments to this function
+are passed to `htx_load`.
+
+### `htx_app`
+
+`htx_app` has no arguments.  It fires up a shiny app that lists studies by
+size, study accession number, and study title.  User can search titles
+using regular expressions, and can ask for retrieval of multiple studies.
+The studies are returned in a SummarizedExperiment.  This is for use in R.
+A more advanced query/retrieval app is prototyped at vjcitn.shinyapps.io/cancer9k.
+The cancer9k app provides a 'search engine'-like capability over a richer
+collection of sample-level attributes.  See the package at vjcitn/htxapp
+for the sources related to cancer9k.
+
  [1] "addRD"                                
  [2] "bigrnaFiles"                          
  [3] "experTable"                           
  [4] "htx_app"                              
- [6] "htx_query"                            
  [7] "HumanTranscriptomeCompendium.colnames"
  [8] "procExpToGene"                        
  [9] "sampleAtts"                           
