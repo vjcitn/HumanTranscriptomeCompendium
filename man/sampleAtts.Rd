@@ -17,6 +17,9 @@ for which SRA metadata has inconsistent field sets across experiments.
 Supply a vector of tags that need to be retrieved; when the metadata
 lacks a value for the tag it is filled with NA.}
 }
+\value{
+a data.frame instance
+}
 \description{
 retrieve a normalized data.frame of sample attributes for SRAdbV2 study tibbles
 }
@@ -24,4 +27,10 @@ retrieve a normalized data.frame of sample attributes for SRAdbV2 study tibbles
 Sometimes a field is omitted for control experiments, and with manual programming
 conformant metadata can be produced for these experiments.  Sometimes there is substantial
 diversity among sample.attribute fields recorded within a study.
+}
+\examples{
+if (interactive()) {
+  sa = sampleAtts("SRP027530")
+  head(sa)
+}
 }

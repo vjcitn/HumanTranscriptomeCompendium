@@ -38,6 +38,12 @@ SRAdbV2::Omicidx$new()$search(q=
 #' @note Sometimes a field is omitted for control experiments, and with manual programming
 #' conformant metadata can be produced for these experiments.  Sometimes there is substantial
 #' diversity among sample.attribute fields recorded within a study.
+#' @return a data.frame instance
+#' @examples
+#' if (interactive()) {
+#'   sa = sampleAtts("SRP027530")
+#'   head(sa)
+#' }
 #' @export
 sampleAtts = function(studyAcc, returnBad=FALSE, forcedTags=NULL) {
  if (!requireNamespace("dplyr")) stop("install dplyr to use this function")
@@ -68,3 +74,14 @@ sampleAtts = function(studyAcc, returnBad=FALSE, forcedTags=NULL) {
     experiment.accession=ea, procd),
     stringsAsFactors=FALSE)
 }
+
+getPMID = function (acc) 
+{
+    n1 = getStudy(acc)
+    att = try(n1$study.xrefs[[1]], silent=TRUE)
+    if (inherits(att, "try-error")) return(NA_character_)
+    poss = which(tolower(att$db) == "pubmed")[1]
+    if(length(poss)==0) return(NA_character_)
+    as.character(att$id[poss])
+}
+

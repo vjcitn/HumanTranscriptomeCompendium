@@ -18,6 +18,9 @@ SummarizedExperiment with gene-level quantifications; in this
 case the remotePath value is
 set to `https://s3.amazonaws.com/bcfound-bigrna/rangedHtxGeneSE.rds`.}
 }
+\value{
+a RangedSummarizedExperiment instance
+}
 \description{
 load a SummarizedExperiment shell for the Human Transcriptome Compendium
 }

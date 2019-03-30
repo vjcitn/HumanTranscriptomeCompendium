@@ -16,6 +16,8 @@
 #' folders to be used by tximport.
 #' @return the result of a tximport run
 #' @examples
+#' # this example involves nontrivial internet communications
+#' args(procExpToGene)
 #' \dontrun{
 #' td = tempdir()
 #' od = getwd()

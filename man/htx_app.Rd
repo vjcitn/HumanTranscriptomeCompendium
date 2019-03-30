@@ -6,6 +6,9 @@
 \usage{
 htx_app()
 }
+\value{
+a SummarizedExperiment can be requested through an event
+}
 \description{
 explore SRA metadata
 }

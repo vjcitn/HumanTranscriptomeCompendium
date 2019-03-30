@@ -40,6 +40,8 @@ for use as tx2gene.  The system2 function is used to generate
 folders to be used by tximport.
 }
 \examples{
+# this example involves nontrivial internet communications
+args(procExpToGene)
 \dontrun{
 td = tempdir()
 od = getwd()

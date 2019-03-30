@@ -8,6 +8,7 @@
 #' source transcriptomic.  Some studies will not have
 #' experiments in the compendium, and if such are selected,
 #' a warning will be generated in the session.
+#' @return a SummarizedExperiment can be requested through an event
 #' @examples
 #' if (interactive()) htx_app()
 #' @export

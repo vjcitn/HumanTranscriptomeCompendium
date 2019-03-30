@@ -15,6 +15,7 @@ htx_check_cache = function (cache = BiocFileCache::BiocFileCache(), genesOnly=TR
 #' SummarizedExperiment with gene-level quantifications; in this 
 #' case the remotePath value is
 #' set to `https://s3.amazonaws.com/bcfound-bigrna/rangedHtxGeneSE.rds`.
+#' @return a RangedSummarizedExperiment instance
 #' @examples
 #' htx_load
 #' @export
@@ -31,6 +32,11 @@ htx_load = function (remotePath = "https://s3.amazonaws.com/bcfound-bigrna/htxco
 
 #' add gene-level rowData derived from transcript level rowRanges
 #' @param x result of htx_load()
+#' @return RangedSummarizedExperiment with enhanced rowData
+#' @examples
+#' # this function operates on a SummarizedExperiment that has
+#' # transcript-level rowRanges but gene-level quantifications
+#' addRD
 #' @export
 addRD = function(x) {
  txl = unlist(rowRanges(x), use.names=FALSE)

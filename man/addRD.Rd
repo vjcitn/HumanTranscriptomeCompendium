@@ -9,6 +9,14 @@ addRD(x)
 \arguments{
 \item{x}{result of htx_load()}
 }
+\value{
+RangedSummarizedExperiment with enhanced rowData
+}
 \description{
 add gene-level rowData derived from transcript level rowRanges
+}
+\examples{
+# this function operates on a SummarizedExperiment that has
+# transcript-level rowRanges but gene-level quantifications
+addRD
 }
