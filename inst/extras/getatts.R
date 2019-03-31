@@ -22,8 +22,8 @@ attproc = function (x, ft)
 
 
 getStudy = function(studyAcc) {
-if (!requireNamespace("SRAdbV2")) stop("install SRAdbV2 to use this function")
-SRAdbV2::Omicidx$new()$search(q=
+if (!requireNamespace("SRAdbV2")) stop("install and attach SRAdbV2 to use this function")
+Omicidx$new()$search(q=
   sprintf("study.accession: %s", studyAcc))$scroll()$collate()
 }
 

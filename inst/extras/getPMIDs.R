@@ -7,8 +7,8 @@
 getPMID = function (acc) 
 {
     if (!requireNamespace("SRAdbV2")) 
-        stop("install SRAdbV2 to use this function")
-    n1 = SRAdbV2::Omicidx$new()$search(q = sprintf("study.accession: %s", 
+        stop("install and attach SRAdbV2 to use this function")
+    n1 = Omicidx$new()$search(q = sprintf("study.accession: %s", 
         acc), size=5)$scroll()$yield()
     suppressWarnings({att = try(n1$study.xrefs[[1]], silent = TRUE)})
     if (is.null(att) || inherits(att, "try-error")) 
