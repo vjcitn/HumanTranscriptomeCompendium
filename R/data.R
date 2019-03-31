@@ -35,3 +35,7 @@
 #' head(HumanTranscriptomeCompendium::bigrnaFiles)
 #' }
 "bigrnaFiles"
+#' ds4842: ssrch::DocSet instance with most BigRNA studies
+#' @docType data
+#' @format DocSet class instance
+"ds4842"

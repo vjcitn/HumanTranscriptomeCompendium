@@ -153,9 +153,9 @@ DelayedMatrix for features `G` on samples `S`.  If `G` or `S`
 are too long, the HSDS may return an error.  Systematic
 chunking of large requests is a topic of future development.
 
-### `htx_query`
+### `htx_query_by_study_accession`
 
-`htx_query` has one mandatory argument,
+`htx_query_by_study_accession` has one mandatory argument,
 `study_accessions`.  This function uses `htx_load` to prepare a SummarizedExperiment
 with DelayedArray assay data,
 with samples limited to those in the studies listed in the character vector

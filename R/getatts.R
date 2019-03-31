@@ -75,13 +75,13 @@ sampleAtts = function(studyAcc, returnBad=FALSE, forcedTags=NULL) {
     stringsAsFactors=FALSE)
 }
 
-getPMID = function (acc) 
-{
-    n1 = getStudy(acc)
-    att = try(n1$study.xrefs[[1]], silent=TRUE)
-    if (inherits(att, "try-error")) return(NA_character_)
-    poss = which(tolower(att$db) == "pubmed")[1]
-    if(length(poss)==0) return(NA_character_)
-    as.character(att$id[poss])
-}
+#getPMID = function (acc) 
+#{
+#    n1 = getStudy(acc)
+#    att = try(n1$study.xrefs[[1]], silent=TRUE)
+#    if (inherits(att, "try-error")) return(NA_character_)
+#    poss = which(tolower(att$db) == "pubmed")[1]
+#    if(length(poss)==0) return(NA_character_)
+#    as.character(att$id[poss])
+#}
 
