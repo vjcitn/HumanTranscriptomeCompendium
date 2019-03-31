@@ -1,12 +1,14 @@
 
 #' subset compendium through keyword lookup
 #' @importFrom ssrch kw2docs
+#' @importFrom utils read.csv
 #' @param query character(1) to be found in ls(ssrch::kw2docs(ds4842))
 #' @param \dots passed to `htx_query_by_study_accession`
 #' @note The DocSet instance ds4842 is used.  Lookups are case-sensitive.
 #' Look carefully at note for `htx_query_by_study_accession` to
 #' understand logic of incrementing metadata on a given
 #' input SummarizedExperiment.
+#' @return SummarizedExperiment instance
 #' @examples
 #' htx_query_by_text("HNRNPC")
 #' @export

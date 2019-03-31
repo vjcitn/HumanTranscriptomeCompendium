@@ -51,7 +51,7 @@ sampleAtts = function(studyAcc, returnBad=FALSE, forcedTags=NULL) {
  nr = nrow(st)
  if (nr==0) return(data.frame(study.accession=studyAcc, norowsInGetStudy=TRUE))
  sampatts = dplyr::select(st, sample.attributes)[[1]]
- nrs = sapply(sampatts, nrow)
+ nrs = vapply(sampatts, nrow, numeric(1))
  if (is.null(forcedTags) & !all(nrs==nrs[1])) {
   message("varying numbers of sample.attributes recorded through study")
   message("taking union of all available tags for study")

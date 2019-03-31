@@ -9,6 +9,8 @@ htx_check_cache = function (cache = BiocFileCache::BiocFileCache(), genesOnly=TR
 
 # WOULD importFrom BiocFileCache bfcinfo BiocFileCache bfcrpath
 #' load a SummarizedExperiment shell for the Human Transcriptome Compendium
+#' @importFrom S4Vectors mcols
+#' @importFrom SummarizedExperiment rowRanges rowData<-
 #' @param remotePath path to an RDS representation of the DelayedArray-based SummarizedExperiment
 #' @param cache a BiocFileCache instance, defaulting to value of BiocFileCache()
 #' @param genesOnly logical(1) if TRUE return reference to 

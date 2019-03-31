@@ -21,7 +21,6 @@
 # ans = try(oidx$search(sprintf("study.accession: '%s'", study.accession),
 #               entity=entity)$scroll()$collate())
 # if (!asDataFrame) return(ans)
-# ato = sapply(ans, is.atomic)
 # DF = S4Vectors::DataFrame(as.data.frame(ans[,which(ato)]))
 # if (any(!ato)) S4Vectors::metadata(DF) = list(non.atomic=ans[,-which(ato)])
 # DF

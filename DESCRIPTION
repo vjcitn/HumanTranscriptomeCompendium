@@ -2,13 +2,13 @@ Package: HumanTranscriptomeCompendium
 Title: Tools to work with a Compendium of 181000 human transcriptome sequencing studies
 Description: Provide tools for working with a 
 	compendium of human transcriptome sequences (originally htxcomp).
-Version: 0.2.3
+Version: 0.99.0
 Author: Sean Davis, Vince Carey
 Suggests: knitr, BiocStyle, beeswarm, tximportData,
-	DT, tximport, SummarizedExperiment, SRAdbV2,
+	DT, tximport, SRAdbV2,
 	dplyr, magrittr,
 	BiocFileCache, testthat
-Imports: shiny, ssrch, S4Vectors
+Imports: shiny, ssrch, S4Vectors, SummarizedExperiment, utils
 Depends: R (>= 3.5)
 Maintainer: VJ Carey <stvjc@channing.harvard.edu>
 License: Artistic-2.0

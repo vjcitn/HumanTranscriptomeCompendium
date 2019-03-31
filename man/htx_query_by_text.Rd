@@ -11,6 +11,9 @@ htx_query_by_text(query, ...)
 
 \item{\dots}{passed to `htx_query_by_study_accession`}
 }
+\value{
+SummarizedExperiment instance
+}
 \description{
 subset compendium through keyword lookup
 }
