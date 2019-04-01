@@ -4,12 +4,16 @@
 \alias{htx_query_by_text}
 \title{subset compendium through keyword lookup}
 \usage{
-htx_query_by_text(query, ...)
+htx_query_by_text(query, ..., tryGrep = TRUE, ignore.case = TRUE)
 }
 \arguments{
 \item{query}{character(1) to be found in ls(ssrch::kw2docs(ds4842))}
 
 \item{\dots}{passed to `htx_query_by_study_accession`}
+
+\item{tryGrep}{logical(1) if TRUE, `query` does not match any keyword directly, it will be treated as a regular expression and the vector of keywords will be grepped for pattern `query`; defaults to TRUE}
+
+\item{ignore.case}{logical(1) used when tryGrep is TRUE, defaults to TRUE}
 }
 \value{
 SummarizedExperiment instance

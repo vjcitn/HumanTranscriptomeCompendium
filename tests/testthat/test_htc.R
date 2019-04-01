@@ -28,7 +28,7 @@ test_that("key sizes are as expected", {
 # following help to determine if source has changed
 # and may need additional tests or doc
   expect_true(length(as.list(body(htx_query_by_study_accession)))==8)
-  expect_true(length(as.list(body(htx_query_by_text)))==5)
+  expect_true(length(as.list(body(htx_query_by_text)))==8)
   expect_true(length(as.list(body(htx_app))) == 11)
   expect_true(all(dim(experTable)==c(294174,6)))
   expect_true(all(dim(hh)==c(58288L, 181134L)))

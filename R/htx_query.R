@@ -3,6 +3,8 @@
 #' @importFrom ssrch kw2docs
 #' @importFrom utils read.csv
 #' @param query character(1) to be found in ls(ssrch::kw2docs(ds4842))
+#' @param tryGrep logical(1) if TRUE, `query` does not match any keyword directly, it will be treated as a regular expression and the vector of keywords will be grepped for pattern `query`; defaults to TRUE
+#' @param ignore.case logical(1) used when tryGrep is TRUE, defaults to TRUE
 #' @param \dots passed to `htx_query_by_study_accession`
 #' @note The DocSet instance ds4842 is used.  Lookups are case-sensitive.
 #' Look carefully at note for `htx_query_by_study_accession` to
@@ -12,12 +14,23 @@
 #' @examples
 #' htx_query_by_text("HNRNPC")
 #' @export
-htx_query_by_text = function(query, ...) {
+htx_query_by_text = function(query, ..., tryGrep=TRUE, ignore.case=TRUE) {
 #
 # bypass doc_retriever facility to simplify logic
 #
  docset = ds4842
- studies = try(get(query, envir=kw2docs(docset)))
+ kw2d = kw2docs(docset)
+ actual_kw = ls(envir=kw2d)
+ studies = try(get(query, envir=kw2d), silent=TRUE)
+ if (inherits(studies, "try-error")) {
+    if (tryGrep) {
+       hits = grep(query, actual_kw, ignore.case=ignore.case) # find matching keywords
+       if (length(hits)>0) {
+          studies = unique(unlist(lapply(actual_kw[hits], function(x)
+                             get(x, kw2d))))
+          }
+       }
+    }
  if (inherits(studies, "try-error")) stop("query not found in index [keywords to studies]")
  htx_query_by_study_accession(studies, ...)
 }
