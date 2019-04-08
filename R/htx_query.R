@@ -2,11 +2,11 @@
 #' subset compendium through keyword lookup
 #' @importFrom ssrch kw2docs
 #' @importFrom utils read.csv
-#' @param query character(1) to be found in ls(ssrch::kw2docs(ds4842))
+#' @param query character(1) to be found in ls(ssrch::kw2docs(get_ds4841()))
 #' @param tryGrep logical(1) if TRUE, `query` does not match any keyword directly, it will be treated as a regular expression and the vector of keywords will be grepped for pattern `query`; defaults to TRUE
 #' @param ignore.case logical(1) used when tryGrep is TRUE, defaults to TRUE
 #' @param \dots passed to `htx_query_by_study_accession`
-#' @note The DocSet instance ds4842 is used.  Lookups are case-sensitive.
+#' @note The DocSet instance returned by `get_ds4841()` is used.  Lookups are case-sensitive.
 #' Look carefully at note for `htx_query_by_study_accession` to
 #' understand logic of incrementing metadata on a given
 #' input SummarizedExperiment.
@@ -18,7 +18,7 @@ htx_query_by_text = function(query, ..., tryGrep=TRUE, ignore.case=TRUE) {
 #
 # bypass doc_retriever facility to simplify logic
 #
- docset = ds4842
+ docset = get_ds4841()
  kw2d = kw2docs(docset)
  actual_kw = ls(envir=kw2d)
  studies = try(get(query, envir=kw2d), silent=TRUE)

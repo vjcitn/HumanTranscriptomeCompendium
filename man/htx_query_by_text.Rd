@@ -7,7 +7,7 @@
 htx_query_by_text(query, ..., tryGrep = TRUE, ignore.case = TRUE)
 }
 \arguments{
-\item{query}{character(1) to be found in ls(ssrch::kw2docs(ds4842))}
+\item{query}{character(1) to be found in ls(ssrch::kw2docs(get_ds4841()))}
 
 \item{\dots}{passed to `htx_query_by_study_accession`}
 
@@ -22,7 +22,7 @@ SummarizedExperiment instance
 subset compendium through keyword lookup
 }
 \note{
-The DocSet instance ds4842 is used.  Lookups are case-sensitive.
+The DocSet instance returned by `get_ds4841()` is used.  Lookups are case-sensitive.
 Look carefully at note for `htx_query_by_study_accession` to
 understand logic of incrementing metadata on a given
 input SummarizedExperiment.

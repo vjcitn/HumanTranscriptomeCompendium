@@ -28,7 +28,7 @@
 #' }
 #' @export
 procExpToGene = function (acc, tx2gene = tx2gene_gencode27(), urlprefix = "http://bigrna.cancerdatasci.org/", 
-    manifestdata = HumanTranscriptomeCompendium::bigrnaFiles, regexp = "quant.sf.bz2|json") 
+    manifestdata = HumanTranscriptomeCompendium::load_bigrnaFiles(), regexp = "quant.sf.bz2|json") 
 {
     if (file.exists(acc)) 
         stop("will not overwrite existing file")

@@ -16,7 +16,7 @@ htx_app = function() {
  message("acquiring compendium restfulSE...")
  htxSE = htx_load()
  message("done.")
- studdata = HumanTranscriptomeCompendium::studTable
+ studdata = load_studTable()
  studdata = studdata[which(
      studdata$experiment_accession %in% colnames(htxSE)),]
  todrop = which(duplicated(studdata$experiment_accession))

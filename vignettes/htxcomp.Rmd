@@ -175,15 +175,19 @@ for the sources related to cancer9k.
 
 ## Fundamental metadata
 
+A number of the functions described in this subsection make use of
+the SRAdbV2 package managed at github.com/seandavi/SRAdbV2.  If this
+package is not installed, some of the functions described will fail.
+
 ### bigrnaFiles
 
-This is a vector of length `r length(HumanTranscriptomeCompendium::bigrnaFiles)`.
+This is a vector of length `r length(HumanTranscriptomeCompendium::load_bigrnaFiles())`.
 It provides relative paths for all relevant salmon output files
 developed in the BigRNA project.
 
 ### experTable, studTable
 
-This is a data.frame with `r nrow(HumanTranscriptomeCompendium::experTable)`
+This is a data.frame with `r nrow(HumanTranscriptomeCompendium::load_experTable())`
 rows and 6 columns.  It is
 a record of all SRA experiments for which metadata was retrieved
 via SRAdbV2 as of 28 June 2018.  `studTable` provides study title
@@ -278,7 +282,7 @@ by Sean Davis for SRA metadata.
 
 However, real-time querying may be tedious and/or fragile.  Therefore
 we have taken snapshots of the sample.attributes components for all
-studies, serialized them to csv, indexed them using the csv2envs
-utility of htxapp, and produced hashed environments to support
+studies, serialized them to csv, indexed them using the parseDoc
+utility of ssrch, producing hashed environments to support
 interactive search using the selectize.js functionality.  These
-details are worked out in vjcitn/htxapp.
+details are worked out in ssrch package.

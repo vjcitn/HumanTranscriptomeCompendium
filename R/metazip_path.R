@@ -1,3 +1,5 @@
-metazip_path = function()
- system.file("study_metadata/doc4843.zip", package="HumanTranscriptomeCompendium")
+metazip_path = function() {
+ ds = get_ds4841()
+ get("zipf", envir=environment(ds@doc_retriever))
+}
 
