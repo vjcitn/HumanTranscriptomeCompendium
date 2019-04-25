@@ -98,15 +98,16 @@ legend(.6, 15000, legend=unique(glioGene$study_accession[1:100]),
 
 # Access to transcript-level quantifications
 
+_This feature is not available until further notice._
 By setting `genesOnly` to FALSE in `htx_load`,
-we get a transcript-level version of the compendium.
+we can obtain a transcript-level version of the compendium.
 Note that the number of samples in this version exceeds
 that of the gene version by two.  There are two
 unintended columns in the underlying HDF Cloud
 array, with names 'X0' and 'X0.1', that should
 be ignored.
 
-```{r dotx}
+```{r dotx, eval=FALSE}
 txlev = htx_load(genesOnly=FALSE)
 txlev
 ```

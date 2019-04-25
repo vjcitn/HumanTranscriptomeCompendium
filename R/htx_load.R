@@ -1,9 +1,33 @@
+## freshen_genes = function (endpoint = URL_hsds(), svrtype = "hsds", dsetname = "/counts") 
+## {
+## #
+## # for rhdf5client >= 1.5.3 we have to use HSDSArray instead of older class components
+## #
+##     ds = HSDSArray(endpoint = endpoint, svrtype = svrtype, domain = "/shared/bioconductor/htxcomp_genes.h5",
+##         dsetname = dsetname)
+##     ds
+## }
+## 
+## freshen_txlevel = function (endpoint = URL_hsds(), svrtype = "hsds", dsetname = "/counts") 
+## {
+## #
+## # for rhdf5client >= 1.5.3 we have to use HSDSArray instead of older class components
+## #
+##     ds = HSDSArray(endpoint = endpoint, svrtype = svrtype, domain = "/shared/bioconductor/basecounts.h5",
+##         dsetname = dsetname)
+##     ds
+## }
+
 htx_check_cache = function (cache = BiocFileCache::BiocFileCache(), genesOnly=TRUE) 
 {
+# return 2-vector: c(action, rid if available)
     if (!requireNamespace("BiocFileCache")) stop("install BiocFileCache to use this function")
-    allr = BiocFileCache::bfcinfo(cache)$rname
-    "https://s3.amazonaws.com/bcfound-bigrna/htxcompSE.rds" %in% 
-        allr
+    if (genesOnly) qans = BiocFileCache::bfcquery(cache, "rangedHtxGeneSE.rds")
+    else qans = BiocFileCache::bfcquery(cache, "htxcompSE.rds") # transcript-level
+    if (nrow(qans)<1) return(c("install", NA))
+    chkupdate = BiocFileCache::bfcneedsupdate(cache, qans$rid[1])
+    if (chkupdate) return(c("update", rid=qans$rid[1]))
+    c("ok", qans$rid[1])
 }
 
 
@@ -22,15 +46,24 @@ htx_check_cache = function (cache = BiocFileCache::BiocFileCache(), genesOnly=TR
 #' htx_load
 #' @export
 htx_load = function (remotePath = "https://s3.amazonaws.com/bcfound-bigrna/htxcompSE.rds",
-    cache = BiocFileCache::BiocFileCache(), genesOnly=TRUE) 
+    cache = BiocFileCache::BiocFileCache(), genesOnly=TRUE)
 {
+    if (!genesOnly) stop("transcript-level quantifications not available currently")
     if (!requireNamespace("BiocFileCache")) stop("install BiocFileCache to use this function")
-    if (!htx_check_cache(cache)) 
-        message("adding RDS to local cache, future invocations will use local image")
     if (genesOnly) remotePath = "https://s3.amazonaws.com/bcfound-bigrna/rangedHtxGeneSE.rds"
+    chkans = htx_check_cache(cache)
+    if (chkans[1] == "install") {
+        message("adding RDS to local cache, future invocations will use local image")
+        }
+    else if (chkans[1] == "update") {
+        message("updating local cache")
+        tmp = BiocFileCache::bfcupdate(cache, rid=chkans[2], fpath=remotePath, download=TRUE)
+        }
+    else if (chkans[1] != "ok") stop("unintended response from cache check")
     path = BiocFileCache::bfcrpath(cache, remotePath)
     readRDS(path)
 }
+
 
 #' add gene-level rowData derived from transcript level rowRanges
 #' @param x result of htx_load()
