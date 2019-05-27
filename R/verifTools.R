@@ -27,7 +27,7 @@
 #' setwd(od)
 #' }
 #' @export
-procExpToGene = function (acc, tx2gene = tx2gene_gencode27(), urlprefix = "http://bigrna.cancerdatasci.org/", 
+procExpToGene = function (acc, tx2gene = tx2gene_gencode27(), urlprefix = "http://bigrna-test.cancerdatasci.org/data/?accession=", 
     manifestdata = HumanTranscriptomeCompendium::load_bigrnaFiles(), regexp = "quant.sf.bz2|json") 
 {
     if (file.exists(acc)) 
@@ -43,7 +43,7 @@ procExpToGene = function (acc, tx2gene = tx2gene_gencode27(), urlprefix = "http:
     system2("mkdir", args = paste0(acc, "/logs"))
     system2("mkdir", args = paste0(acc, "/aux_info/bootstrap"))
     setwd(acc)
-    fns = paste(urlprefix, files, sep = "")
+    fns = paste(urlprefix, "&filename=", files, sep = "")
     jnk = lapply(fns, function(x) system2("wget", args = x))
     if (is.null(regexp)) 
         system("mv *.txt *.json *.bz2 *tsv *.log aux_info")

@@ -6,7 +6,7 @@
 and develop gene-level quantifications using tximport}
 \usage{
 procExpToGene(acc, tx2gene = tx2gene_gencode27(),
-  urlprefix = "http://bigrna.cancerdatasci.org/",
+  urlprefix = "http://bigrna-test.cancerdatasci.org/data/?accession=",
   manifestdata = HumanTranscriptomeCompendium::load_bigrnaFiles(),
   regexp = "quant.sf.bz2|json")
 }
