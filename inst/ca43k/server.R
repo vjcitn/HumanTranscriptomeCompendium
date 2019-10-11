@@ -1,6 +1,5 @@
 library(DT)
 library(ssrch)
-#load("ds_can1009b.rda")
 library(restfulSE)
 #if (!exists("rangedHtxSE")) load("rangedHtxSE.rda")
 if (!exists("se")) {
@@ -9,7 +8,7 @@ se = HumanTranscriptomeCompendium::addRD(se)
 }
 sefilter = function(se, y) se[,which(se$study_accession %in% y)]
 
- docs = docset  = ssrch::ds_can1009b
+ docs = docset  = ssrch::ds_can1009b()
  titles = slot(docset, "titles")
  urls = slot(docset, "urls") # may be empty
 #
