@@ -52,7 +52,7 @@ the HDF Scalable Data Service, at `http://hsdshdflab.hdfgroup.org`.
 library(HumanTranscriptomeCompendium)
 genelev = htx_load()
 genelev
-assay(genelev)
+if (rhdf5client::check_hsds()) assay(genelev)
 ```
 
 ## Identifying single-cell RNA-seq studies
@@ -90,10 +90,12 @@ glioGene
 
 To acquire numerical values, `as.matrix(assay())` is needed.
 ```{r lkmat}
-beeswarm(as.matrix(assay(
+if (rhdf5client::check_hsds()) {
+ beeswarm(as.matrix(assay(
    glioGene["ENSG00000138413.13",1:100])), pwcol=as.numeric(factor(glioGene$study_title[1:100])), ylab="IDH1 expression")
-legend(.6, 15000, legend=unique(glioGene$study_accession[1:100]),
+ legend(.6, 15000, legend=unique(glioGene$study_accession[1:100]),
    col=1:2, pch=c(1,1))
+}
 ```
 
 # Access to transcript-level quantifications
