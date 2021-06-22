@@ -18,6 +18,8 @@
 ##     ds
 ## }
 
+aws_target = function() "https://biocfound-bigrnatx.s3.us-west-2.amazonaws.com/rangedHtxGeneSE.rds"
+
 htx_check_cache = function (cache = BiocFileCache::BiocFileCache(), genesOnly=TRUE) 
 {
 # return 2-vector: c(action, rid if available)
@@ -40,7 +42,7 @@ htx_check_cache = function (cache = BiocFileCache::BiocFileCache(), genesOnly=TR
 #' @param genesOnly logical(1) if TRUE return reference to 
 #' SummarizedExperiment with gene-level quantifications; in this 
 #' case the remotePath value is
-#' set to `https://s3.amazonaws.com/bcfound-bigrna/rangedHtxGeneSE.rds`.
+#' set to `https://biocfound-bigrnatx.s3.us-west-2.amazonaws.com/rangedHtxGeneSE.rds`.
 #' @return a RangedSummarizedExperiment instance
 #' @examples
 #' htx_load
@@ -50,7 +52,7 @@ htx_load = function (remotePath = "https://s3.amazonaws.com/bcfound-bigrna/htxco
 {
     if (!genesOnly) stop("transcript-level quantifications not available currently")
     if (!requireNamespace("BiocFileCache")) stop("install BiocFileCache to use this function")
-    if (genesOnly) remotePath = "https://s3.amazonaws.com/bcfound-bigrna/rangedHtxGeneSE.rds"
+    if (genesOnly) remotePath = "https://biocfound-bigrnatx.s3.us-west-2.amazonaws.com/rangedHtxGeneSE.rds"
     chkans = htx_check_cache(cache)
     if (chkans[1] == "install") {
         message("adding RDS to local cache, future invocations will use local image")

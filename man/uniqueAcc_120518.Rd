@@ -4,7 +4,9 @@
 \name{uniqueAcc_120518}
 \alias{uniqueAcc_120518}
 \title{experiment accessions available in compendium as of may 12 2018}
-\format{data.frame}
+\format{
+data.frame
+}
 \source{
 SRAdbV2 may 12 2018
 }

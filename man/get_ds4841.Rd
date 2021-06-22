@@ -5,8 +5,10 @@
 \title{return instance of ssrch::DocSet with metadata on 4841 human
 transcriptome studies in NCBI SRA}
 \usage{
-get_ds4841(cache = BiocFileCache::BiocFileCache(),
-  csv_zip_path = path_doc4842())
+get_ds4841(
+  cache = BiocFileCache::BiocFileCache(),
+  csv_zip_path = path_doc4842()
+)
 }
 \arguments{
 \item{cache}{instance of `BiocFileCache`, defaults to `BiocFileCache::BiocFileCache()`}

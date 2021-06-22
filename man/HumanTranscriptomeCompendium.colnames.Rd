@@ -4,7 +4,9 @@
 \name{HumanTranscriptomeCompendium.colnames}
 \alias{HumanTranscriptomeCompendium.colnames}
 \title{character vector of available samples in HDF cloud assay representation}
-\format{character vector}
+\format{
+character vector
+}
 \source{
 compendium processing
 }

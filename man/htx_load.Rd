@@ -4,9 +4,11 @@
 \alias{htx_load}
 \title{load a SummarizedExperiment shell for the Human Transcriptome Compendium}
 \usage{
-
-  htx_load(remotePath = "https://s3.amazonaws.com/bcfound-bigrna/htxcompSE.rds",
-  cache = BiocFileCache::BiocFileCache(), genesOnly = TRUE)
+htx_load(
+  remotePath = "https://s3.amazonaws.com/bcfound-bigrna/htxcompSE.rds",
+  cache = BiocFileCache::BiocFileCache(),
+  genesOnly = TRUE
+)
 }
 \arguments{
 \item{remotePath}{path to an RDS representation of the DelayedArray-based SummarizedExperiment}
@@ -16,7 +18,7 @@
 \item{genesOnly}{logical(1) if TRUE return reference to 
 SummarizedExperiment with gene-level quantifications; in this 
 case the remotePath value is
-set to `https://s3.amazonaws.com/bcfound-bigrna/rangedHtxGeneSE.rds`.}
+set to `https://biocfound-bigrnatx.s3.us-west-2.amazonaws.com/rangedHtxGeneSE.rds`.}
 }
 \value{
 a RangedSummarizedExperiment instance
